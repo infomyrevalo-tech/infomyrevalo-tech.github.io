@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revalo - Premium Real Estate Investment Management & Business Plan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0A1A35;
+            --dark-navy: #061224;
+            --gold: #C9A96E;
+            --light-gold: #E8D9B9;
+            --white: #FFFFFF;
+            --light-gray: #F8FAFC;
+            --medium-gray: #E8ECF1;
+            --dark-gray: #64748B;
+            --green: #10B981;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow: 0 10px 40px rgba(10, 26, 53, 0.1);
+            --shadow-hover: 0 20px 60px rgba(10, 26, 53, 0.15);
+            --gradient: linear-gradient(135deg, var(--navy) 0%, #1a3a5f 100%);
+            --gold-gradient: linear-gradient(135deg, var(--gold) 0%, #D4B57F 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            color: var(--navy);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-color: var(--white);
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--navy);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .logo-reveal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.8);
+            animation: logoReveal 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        .logo-reveal .logo-wrapper {
+            width: 120px;
+            height: 120px;
+            background: var(--white);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 40px rgba(201, 169, 110, 0.4);
+            padding: 15px;
+        }
+        
+        .logo-reveal .logo-wrapper img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+        
+        .logo-reveal .logo-text {
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .logo-reveal .brand {
+            font-size: 52px;
+            font-weight: 800;
+            color: #FFFFFF !important;
+            line-height: 1;
+            transform: translateY(100%);
+            animation: textReveal 0.8s 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .logo-reveal .tagline {
+            font-size: 16px;
+            color: var(--light-gold);
+            letter-spacing: 3px;
+            font-weight: 500;
+            margin-top: 12px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: taglineReveal 0.8s 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+        
+        @keyframes logoReveal {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes textReveal {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes taglineReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        body.loading main {
+            opacity: 0;
+        }
+        
+        body.loaded main {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 5px 20px rgba(10, 26, 53, 0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(10, 26, 53, 0.05);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(201, 169, 110, 0.3);
+            transition: var(--transition);
+        }
+        
+        .logo-wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(201, 169, 110, 0.4);
+        }
+        
+        .logo-wrapper img {
+            width: 40px;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text .brand {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+        }
+        
+        .logo-text .tagline {
+            font-size: 11px;
+            color: var(--dark-gray);
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 500;
+            font-size: 15px;
+            padding: 12px 22px;
+            border-radius: 10px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--gold);
+            background: rgba(201, 169, 110, 0.08);
+        }
+        
+        nav ul li a.active {
+            color: var(--gold);
+            background: rgba(201, 169, 110, 0.12);
+        }
+        
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cta-button {
+            background: var(--gold-gradient);
+            color: var(--navy);
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(201, 169, 110, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(201, 169, 110, 0.4);
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-button {
+            background: #25D366;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 26, 53, 0.95) 0%, rgba(26, 58, 95, 0.92) 100%), 
+                        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 180px 0 140px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .button-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .button-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: var(--gold);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 30px auto 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Services Section */
+        .services-section {
+            background-color: var(--light-gray);
+            position: relative;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 45px 35px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(10, 26, 53, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.1) 0%, rgba(201, 169, 110, 0.05) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--gold);
+            font-size: 32px;
+            transition: var(--transition);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, rgba(201, 169, 110, 0.15) 0%, rgba(201, 169, 110, 0.1) 100%);
+        }
+        
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 18px;
+            color: var(--navy);
+            font-weight: 600;
+        }
+        
+        .service-card p {
+            color: var(--dark-gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+        
+        .service-features li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+            color: var(--dark-gray);
+        }
+        
+        .service-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .roi-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--green);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: auto;
+            gap: 8px;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        /* Global Presence Section */
+        .global-section {
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .global-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .global-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+        
+        .global-text p {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .country-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .country-card {
+            background: var(--light-gray);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(10, 26, 53, 0.05);
+            box-shadow: var(--shadow);
+        }
+        
+        .country-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .country-card .flag {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .country-card .name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--navy);
+        }
+        
+        .country-card .benefit {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .global-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .global-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .global-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Process Section */
+        .process-section {
+            background-color: var(--light-gray);
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            counter-reset: step;
+        }
+        
+        .process-step {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 45px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(10, 26, 53, 0.05);
+        }
+        
+        .process-step:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 8px 20px rgba(201, 169, 110, 0.4);
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .process-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(201, 169, 110, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto 25px;
+            color: var(--gold);
+            font-size: 28px;
+            transition: var(--transition);
+        }
+        
+        .process-step:hover .process-icon {
+            transform: scale(1.1);
+            background: rgba(201, 169, 110, 0.15);
+        }
+        
+        .process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+            font-weight: 600;
+        }
+        
+        /* Business Plan Section */
+        .business-plan-section {
+            background: var(--gradient);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .business-plan-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 70px;
+        }
+        
+        .business-plan-intro h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .business-plan-intro p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .plan-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .plan-feature {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .plan-feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .plan-feature .icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--gold);
+            font-size: 32px;
+            transition: var(--transition);
+        }
+        
+        .plan-feature:hover .icon {
+            transform: scale(1.1);
+        }
+        
+        .plan-feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .plan-feature p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+        
+        /* Executive Summary */
+        .executive-summary {
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .summary-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        
+        .summary-text h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .highlight-box {
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+            border-left: 4px solid var(--gold);
+            transition: var(--transition);
+        }
+        
+        .highlight-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .highlight-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .summary-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+        }
+        
+        .summary-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .summary-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Business Model Section */
+        .business-model-section {
+            background-color: var(--light-gray);
+        }
+        
+        .model-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid var(--medium-gray);
+            flex-wrap: wrap;
+        }
+        
+        .model-tab {
+            padding: 16px 30px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            position: relative;
+        }
+        
+        .model-tab.active {
+            color: var(--navy);
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .model-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .model-content.active {
+            display: block;
+        }
+        
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .model-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .model-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--navy);
+            font-weight: 600;
+        }
+        
+        .model-card .icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(201, 169, 110, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--gold);
+            font-size: 28px;
+            transition: var(--transition);
+        }
+        
+        .model-card:hover .icon {
+            transform: scale(1.1);
+            background: rgba(201, 169, 110, 0.15);
+        }
+        
+        .model-card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .model-card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .model-card ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        
+        /* Market Analysis */
+        .market-section {
+            background-color: var(--white);
+        }
+        
+        .market-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        
+        .market-text h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stat-box {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--dark-gray);
+            margin-top: 8px;
+        }
+        
+        .market-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+        }
+        
+        .market-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .market-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Investment Strategy */
+        .strategy-section {
+            background-color: var(--light-gray);
+        }
+        
+        .strategy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        
+        .strategy-text h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .strategy-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(10, 26, 53, 0.05);
+            box-shadow: var(--shadow);
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .strategy-card .icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: block;
+            color: var(--gold);
+        }
+        
+        .strategy-card .name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--navy);
+        }
+        
+        .strategy-card .description {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .strategy-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .strategy-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .strategy-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Premium Investments Section */
+        .premium-section {
+            background-color: var(--white);
+        }
+        
+        .premium-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        
+        .premium-text h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .premium-card {
+            background: var(--light-gray);
+            padding: 30px 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(10, 26, 53, 0.05);
+            box-shadow: var(--shadow);
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .premium-card .icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: block;
+            color: var(--gold);
+        }
+        
+        .premium-card .name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--navy);
+        }
+        
+        .premium-card .description {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .premium-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .premium-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .premium-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Zurich Rentals Section */
+        .zurich-rentals-section {
+            background-color: var(--light-gray);
+        }
+        
+        .rentals-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        
+        .rentals-text h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .rentals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .rental-card {
+            background: var(--white);
+            padding: 30px 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(10, 26, 53, 0.05);
+            box-shadow: var(--shadow);
+        }
+        
+        .rental-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .rental-card .icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: block;
+            color: var(--gold);
+        }
+        
+        .rental-card .name {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: var(--navy);
+        }
+        
+        .rental-card .description {
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .rentals-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .rentals-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .rentals-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Investment Opportunity */
+        .investment-section {
+            background: var(--gradient);
+            color: var(--white);
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .investment-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .investment-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .investment-section p {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        .investment-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .investment-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .investment-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .investment-card .icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--gold);
+            font-size: 32px;
+            transition: var(--transition);
+        }
+        
+        .investment-card:hover .icon {
+            transform: scale(1.1);
+        }
+        
+        .investment-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient);
+            color: var(--white);
+            text-align: center;
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-navy);
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--gold);
+            position: relative;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .footer-column p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--white);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .contact-info a {
+            color: var(--light-gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+        
+        .contact-info a:hover {
+            color: var(--gold);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .global-content, .summary-content, .market-content, .strategy-content, .premium-content, .rentals-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .header-cta {
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px 0;
+            }
+            
+            .hero {
+                padding: 160px 0 100px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-buttons a {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                justify-content: center;
+            }
+            
+            .model-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .country-cards, .market-stats, .strategy-grid, .premium-grid, .rentals-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 80px 0;
+            }
+            
+            .services-grid, .model-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .investment-section h2, .cta-section h2 {
+                font-size: 2rem;
+            }
+            
+            .service-card, .highlight-box, .model-card {
+                padding: 30px 20px;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Schermata di caricamento con animazione del logo -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="logo-reveal">
+            <div class="logo-wrapper">
+                <img src="revalologo11.png" alt="Revalo">
+            </div>
+            <div class="logo-text">
+                <div class="brand">REVALO</div>
+                <div class="tagline">PREMIUM REAL ESTATE INVESTMENTS</div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <header>
+            <div class="container header-container">
+                <a href="#" class="logo-container">
+                    <div class="logo-wrapper">
+                        <img src="revalologo11.png" alt="Revalo">
+                    </div>
+                    <div class="logo-text">
+                        <div class="brand">REVALO</div>
+                        <div class="tagline">PREMIUM INVESTMENTS</div>
+                    </div>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#services" class="active">Services</a></li>
+                        <li><a href="#presence">Global Presence</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#business-plan">Business Plan</a></li>
+                        <li><a href="#zurich-rentals">Zurich Rentals</a></li>
+                        <li><a href="#contacts">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="header-cta">
+                    <a href="https://wa.me/41765354552" class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                    <a href="#investment" class="cta-button">
+                        <i class="fas fa-chart-line"></i>
+                        Investment Opportunity
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Premium Real Estate Investments, Expertly Managed</h1>
+                <p>Revalo delivers sophisticated real estate investment solutions with complete end-to-end management. Maximize your returns through our strategic approach to property acquisition, renovation, and management across international markets.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="cta-button">
+                        <i class="fas fa-chart-line"></i>
+                        Explore Investment Opportunities
+                    </a>
+                    <a href="#zurich-rentals" class="button-secondary">
+                        <i class="fas fa-home"></i>
+                        View Zurich Rentals
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Comprehensive Investment Services</h2>
+                    <p>Our integrated approach covers every aspect of real estate investment, delivering exceptional returns through strategic property management and development</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-search-location"></i></div>
+                        <h3>Strategic Acquisition & Development</h3>
+                        <p>We identify undervalued properties with exceptional potential and transform them through meticulous renovation and development.</p>
+                        <ul class="service-features">
+                            <li>Comprehensive market analysis & due diligence</li>
+                            <li>Strategic property selection & acquisition</li>
+                            <li>Architectural design & project management</li>
+                            <li>Quality-controlled renovation execution</li>
+                            <li>Budget optimization & timeline management</li>
+                        </ul>
+                        <div class="roi-badge">
+                            <i class="fas fa-chart-line"></i>
+                            Value Enhancement: 25-45%
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-gem"></i></div>
+                        <h3>Premium Property Sales</h3>
+                        <p>Maximize your investment returns through our sophisticated sales strategy and premium market positioning.</p>
+                        <ul class="service-features">
+                            <li>Strategic pricing & market positioning</li>
+                            <li>Professional staging & photography</li>
+                            <li>Multi-channel marketing campaigns</li>
+                            <li>Expert negotiation & deal structuring</li>
+                            <li>Legal & financial transaction management</li>
+                        </ul>
+                        <div class="roi-badge">
+                            <i class="fas fa-trophy"></i>
+                            Average ROI: 30-55%
+                        </div>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-crown"></i></div>
+                        <h3>Luxury Rental Management</h3>
+                        <p>Premium short-term rental management delivering superior returns through exclusive positioning and impeccable service.</p>
+                        <ul class="service-features">
+                            <li>Luxury positioning & premium pricing</li>
+                            <li>24/7 concierge & guest services</li>
+                            <li>Professional cleaning & maintenance</li>
+                            <li>Dynamic pricing optimization</li>
+                            <li>Exclusive partnership networks</li>
+                        </ul>
+                        <div class="roi-badge">
+                            <i class="fas fa-star"></i>
+                            Annual Returns: 10-18%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="presence" class="global-section">
+            <div class="container">
+                <div class="global-content">
+                    <div class="global-text">
+                        <h2>Global Excellence, Local Expertise</h2>
+                        <p>With strategic presence in the world's most promising markets, we leverage international opportunities while providing localized expertise and optimal tax structures.</p>
+                        
+                        <div class="country-cards">
+                            <div class="country-card">
+                                <span class="flag">🇨🇭</span>
+                                <span class="name">Zurich</span>
+                                <span class="benefit">Luxury Alpine Properties</span>
+                            </div>
+                            <div class="country-card">
+                                <span class="flag">🇮🇹</span>
+                                <span class="name">Brescia</span>
+                                <span class="benefit">Premium Italian Markets</span>
+                            </div>
+                            <div class="country-card">
+                                <span class="flag">🇦🇱</span>
+                                <span class="name">Tirana</span>
+                                <span class="benefit">Emerging Coastal Opportunities</span>
+                            </div>
+                            <div class="country-card">
+                                <span class="flag">🇦🇪</span>
+                                <span class="name">Dubai</span>
+                                <span class="benefit">Luxury Global Investments</span>
+                            </div>
+                        </div>
+                        
+                        <a href="#contacts" class="cta-button" style="margin-top: 40px;">
+                            <i class="fas fa-globe-europe"></i>
+                            Explore International Opportunities
+                        </a>
+                    </div>
+                    
+                    <div class="global-image">
+                        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Global Real Estate Investment Map">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="process-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>The Revalo Excellence Process</h2>
+                    <p>A meticulously crafted 4-phase approach ensuring premium results and complete investor satisfaction</p>
+                </div>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="process-icon"><i class="fas fa-chess-queen"></i></div>
+                        <h3>Strategic Consultation</h3>
+                        <p>Comprehensive analysis of your investment goals, risk profile, and financial objectives to create a bespoke strategy.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-icon"><i class="fas fa-binoculars"></i></div>
+                        <h3>Premium Acquisition</h3>
+                        <p>Strategic identification and acquisition of exceptional properties with significant value-creation potential.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-icon"><i class="fas fa-hammer"></i></div>
+                        <h3>Elite Enhancement</h3>
+                        <p>Premium renovation and development executed to the highest standards, maximizing property value and appeal.</p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="process-icon"><i class="fas fa-crown"></i></div>
+                        <h3>Optimal Monetization</h3>
+                        <p>Strategic exit through premium sales or luxury rental management to maximize investment returns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="business-plan" class="business-plan-section">
+            <div class="container">
+                <div class="business-plan-intro">
+                    <h2>Strategic Business Plan</h2>
+                    <p>Our comprehensive business plan outlines Revalo's sophisticated approach to real estate investment, detailing our market strategy, operational framework, and growth opportunities for sophisticated investors.</p>
+                </div>
+                
+                <div class="plan-features">
+                    <div class="plan-feature">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Proven Investment Strategy</h3>
+                        <p>Data-driven approach to property selection, renovation, and management delivering consistent premium returns.</p>
+                    </div>
+                    
+                    <div class="plan-feature">
+                        <div class="icon"><i class="fas fa-globe"></i></div>
+                        <h3>International Tax Optimization</h3>
+                        <p>Strategic corporate structures in favorable jurisdictions maximizing after-tax returns for global investors.</p>
+                    </div>
+                    
+                    <div class="plan-feature">
+                        <div class="icon"><i class="fas fa-crown"></i></div>
+                        <h3>Premium Market Positioning</h3>
+                        <p>Exclusive focus on high-value properties in prime locations with significant appreciation potential.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="executive" class="executive-summary">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Executive Summary</h2>
+                    <p>Revalo represents a sophisticated approach to real estate investment, combining strategic property acquisition, value-add renovation, and optimized management to deliver premium returns.</p>
+                </div>
+                
+                <div class="summary-content">
+                    <div class="summary-text">
+                        <h2>Transforming Real Estate Investment</h2>
+                        <p>Revalo leverages market inefficiencies to identify undervalued properties in premium locations, executes strategic renovations through our affiliated construction company, and maximizes investor returns through sophisticated exit strategies or premium rental management.</p>
+                        
+                        <div class="highlight-box">
+                            <h3>Investment Thesis</h3>
+                            <p>We target properties with significant below-market value potential, implement value-add renovations, and achieve substantial returns through strategic sales or consistent annual income through short-term rental management.</p>
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <h3>Tax Optimization</h3>
+                            <p>Through strategic international corporate structures in favorable jurisdictions, we optimize tax exposure while maintaining full legal compliance across all operations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-image">
+                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Real Estate Investment">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="business-model" class="business-model-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Business Model</h2>
+                    <p>Our comprehensive approach to real estate investment maximizes returns while minimizing investor involvement through professional management</p>
+                </div>
+                
+                <div class="model-tabs">
+                    <div class="model-tab active" data-tab="acquisition">Acquisition & Renovation</div>
+                    <div class="model-tab" data-tab="sales">Sales & Exit Strategy</div>
+                    <div class="model-tab" data-tab="rental">Rental Management</div>
+                    <div class="model-tab" data-tab="tax">Tax Optimization</div>
+                </div>
+                
+                <div class="model-content active" id="acquisition-content">
+                    <div class="model-grid">
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-search-location"></i></div>
+                            <h3>Strategic Property Identification</h3>
+                            <p>We identify undervalued properties in premium locations using proprietary market analysis tools and extensive local expertise.</p>
+                            <ul>
+                                <li>Comprehensive market analysis and trend identification</li>
+                                <li>Advanced property valuation and due diligence</li>
+                                <li>Strategic negotiation and acquisition execution</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-tools"></i></div>
+                            <h3>Value-Add Renovation</h3>
+                            <p>Our affiliated construction company executes strategic renovations to maximize property value and market appeal.</p>
+                            <ul>
+                                <li>Strategic renovation planning and design</li>
+                                <li>Quality-controlled execution with premium materials</li>
+                                <li>Rigorous budget and timeline management</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>Value Maximization</h3>
+                            <p>We transform properties to achieve significant value appreciation through targeted improvements and premium positioning.</p>
+                            <ul>
+                                <li>Interior and exterior architectural upgrades</li>
+                                <li>Modern amenities and smart home integration</li>
+                                <li>Premium finishes and luxury features</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-content" id="sales-content">
+                    <div class="model-grid">
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-home"></i></div>
+                            <h3>Strategic Pricing</h3>
+                            <p>We determine optimal pricing based on comprehensive market analysis and premium property positioning.</p>
+                            <ul>
+                                <li>Advanced comparative market analysis</li>
+                                <li>Sophisticated pricing strategy development</li>
+                                <li>Premium market positioning for maximum return</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-ad"></i></div>
+                            <h3>Professional Marketing</h3>
+                            <p>High-impact marketing campaigns showcase renovated properties to premium buyer segments.</p>
+                            <ul>
+                                <li>Professional photography and premium staging</li>
+                                <li>Multi-channel digital and traditional marketing</li>
+                                <li>Targeted outreach to qualified buyer networks</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-handshake"></i></div>
+                            <h3>Sales Execution</h3>
+                            <p>Expert negotiation and transaction management ensure optimal sale terms and smooth closings.</p>
+                            <ul>
+                                <li>Strategic offer evaluation and negotiation</li>
+                                <li>Comprehensive contract management</li>
+                                <li>Seamless closing coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-content" id="rental-content">
+                    <div class="model-grid">
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-concierge-bell"></i></div>
+                            <h3>Premium Rental Management</h3>
+                            <p>Complete management of properties on premium platforms for optimal occupancy and revenue.</p>
+                            <ul>
+                                <li>24/7 premium guest communication</li>
+                                <li>Advanced dynamic pricing optimization</li>
+                                <li>Professional listing management and optimization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-broom"></i></div>
+                            <h3>Property Maintenance</h3>
+                            <p>Comprehensive maintenance and cleaning services ensure property quality and guest satisfaction.</p>
+                            <ul>
+                                <li>Regular premium cleaning and inspections</li>
+                                <li>Preventive maintenance scheduling</li>
+                                <li>Emergency repair coordination</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                            <h3>Performance Optimization</h3>
+                            <p>Data-driven approach to maximize occupancy rates, nightly rates, and overall property performance.</p>
+                            <ul>
+                                <li>Advanced performance analytics and reporting</li>
+                                <li>Competitive market analysis</li>
+                                <li>Revenue management optimization strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="model-content" id="tax-content">
+                    <div class="model-grid">
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-globe-europe"></i></div>
+                            <h3>International Structures</h3>
+                            <p>Strategic corporate structures in favorable jurisdictions optimize tax exposure for international investors.</p>
+                            <ul>
+                                <li>Corporate setup in Albania with favorable tax rates</li>
+                                <li>Dubai free zone companies with tax advantages</li>
+                                <li>Swiss holding structures for asset protection</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-balance-scale"></i></div>
+                            <h3>Legal Compliance</h3>
+                            <p>All structures maintain full compliance with international tax regulations and reporting requirements.</p>
+                            <ul>
+                                <li>CRS and FATCA compliance management</li>
+                                <li>Local legal requirements adherence</li>
+                                <li>International tax treaty optimization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="model-card">
+                            <div class="icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <h3>Tax Optimization</h3>
+                            <p>Strategic planning minimizes tax liabilities while maximizing after-tax returns for investors.</p>
+                            <ul>
+                                <li>Tax-efficient holding structures</li>
+                                <li>Strategic profit repatriation planning</li>
+                                <li>Ongoing tax compliance monitoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="market-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Market Analysis</h2>
+                    <p>Comprehensive analysis of real estate market dynamics and strategic investment opportunities</p>
+                </div>
+                
+                <div class="market-content">
+                    <div class="market-text">
+                        <h2>Premium Market Positioning</h2>
+                        <p>Revalo targets specific market segments where we can achieve maximum value appreciation through our renovation and management expertise. Our strategic approach focuses on high-growth markets with proven track records of stability and appreciation.</p>
+                        
+                        <div class="market-stats">
+                            <div class="stat-box">
+                                <span class="stat-value">Substantial</span>
+                                <span class="stat-label">Capital Appreciation</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">Consistent</span>
+                                <span class="stat-label">Rental Income</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">Premium</span>
+                                <span class="stat-label">Occupancy Rates</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">Strategic</span>
+                                <span class="stat-label">Market Positioning</span>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin-top: 30px;">Strategic Target Markets</h3>
+                        <p>We focus on prime locations in Italian cities where property value disparities create significant arbitrage opportunities. Our strategic approach targets properties with substantial upside potential through value-add renovations in markets with strong fundamentals and growth prospects.</p>
+                        
+                        <h3 style="margin-top: 25px;">Tourism Growth Opportunities</h3>
+                        <p>Albania and Spain are experiencing remarkable tourism growth, creating exceptional opportunities for short-term rental investments. Dubai continues to offer stable, high-return real estate investments with its growing economy and international appeal, providing diversified exposure to global real estate markets.</p>
+                    </div>
+                    
+                    <div class="market-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Real Estate Market Analysis">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="strategy-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Investment Strategy</h2>
+                    <p>Sophisticated investment approaches designed for premium returns and risk management</p>
+                </div>
+                
+                <div class="strategy-content">
+                    <div class="strategy-text">
+                        <h2>Strategic Investment Approaches</h2>
+                        <p>Revalo offers multiple investment strategies tailored to different investor profiles and market conditions, from short-term property flips to long-term rental portfolios.</p>
+                        
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <span class="icon"><i class="fas fa-sync-alt"></i></span>
+                                <span class="name">Property Flipping</span>
+                                <span class="description">Strategic acquisition, renovation, and sale of undervalued properties</span>
+                            </div>
+                            <div class="strategy-card">
+                                <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                                <span class="name">Short-Term Rentals</span>
+                                <span class="description">Premium rental management for consistent income generation</span>
+                            </div>
+                            <div class="strategy-card">
+                                <span class="icon"><i class="fas fa-building"></i></span>
+                                <span class="name">Portfolio Development</span>
+                                <span class="description">Strategic acquisition and management of multiple properties</span>
+                            </div>
+                            <div class="strategy-card">
+                                <span class="icon"><i class="fas fa-chart-pie"></i></span>
+                                <span class="name">Diversified Approach</span>
+                                <span class="description">Combined strategies for optimal risk-adjusted returns</span>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin-top: 30px;">Risk Management Framework</h3>
+                        <p>Our comprehensive due diligence, professional management, and strategic exit planning protect investor capital while maximizing returns across market cycles. We employ sophisticated risk assessment methodologies and maintain conservative leverage ratios to ensure portfolio stability.</p>
+                    </div>
+                    
+                    <div class="strategy-image">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Investment Strategy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="premium" class="premium-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Premium Investment Opportunities</h2>
+                    <p>Exclusive access to large-scale investment opportunities for sophisticated investors</p>
+                </div>
+                
+                <div class="premium-content">
+                    <div class="premium-text">
+                        <h2>Strategic Large-Scale Investments</h2>
+                        <p>Beyond traditional residential properties, Revalo offers access to premium investment opportunities in high-growth sectors with substantial returns and institutional-grade due diligence.</p>
+                        
+                        <div class="premium-grid">
+                            <div class="premium-card">
+                                <span class="icon"><i class="fas fa-hotel"></i></span>
+                                <span class="name">Luxury Hotels & Resorts</span>
+                                <span class="description">Premium hospitality investments in high-demand tourist destinations with international brand partnerships</span>
+                            </div>
+                            <div class="premium-card">
+                                <span class="icon"><i class="fas fa-plane-departure"></i></span>
+                                <span class="name">Airport Developments</span>
+                                <span class="description">Strategic investments in airport infrastructure and commercial developments in emerging markets</span>
+                            </div>
+                            <div class="premium-card">
+                                <span class="icon"><i class="fas fa-dice"></i></span>
+                                <span class="name">Casino & Entertainment</span>
+                                <span class="description">Premium entertainment complexes in regulated markets with established operational partners</span>
+                            </div>
+                            <div class="premium-card">
+                                <span class="icon"><i class="fas fa-solar-panel"></i></span>
+                                <span class="name">Clean Energy Production</span>
+                                <span class="description">Sustainable energy investments with long-term stable returns and government incentives</span>
+                            </div>
+                        </div>
+                        
+                        <p style="margin-top: 30px;">These premium opportunities are available to qualified investors seeking portfolio diversification and exposure to high-growth sectors with substantial return potential. Each investment undergoes rigorous due diligence and features institutional-grade structuring.</p>
+                    </div>
+                    
+                    <div class="premium-image">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Premium Real Estate Investments">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="zurich-rentals" class="zurich-rentals-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Zurich Premium Rentals</h2>
+                    <p>Exclusive selection of premium apartments and studios in prime Zurich locations</p>
+                </div>
+                
+                <div class="rentals-content">
+                    <div class="rentals-text">
+                        <h2>Premium Living in Zurich</h2>
+                        <p>Discover our curated selection of premium rental properties in Zurich's most desirable neighborhoods. From modern studios to spacious apartments, we offer exceptional living experiences with premium amenities and professional management.</p>
+                        
+                        <div class="rentals-grid">
+                            <div class="rental-card">
+                                <span class="icon"><i class="fas fa-home"></i></span>
+                                <span class="name">Studio Apartments</span>
+                                <span class="description">Modern, fully-equipped studios in prime Zurich locations with premium finishes</span>
+                            </div>
+                            <div class="rental-card">
+                                <span class="icon"><i class="fas fa-building"></i></span>
+                                <span class="name">1-Bedroom Apartments</span>
+                                <span class="description">Spacious one-bedroom apartments with luxury amenities and city views</span>
+                            </div>
+                            <div class="rental-card">
+                                <span class="icon"><i class="fas fa-city"></i></span>
+                                <span class="name">2-Bedroom Apartments</span>
+                                <span class="description">Luxury two-bedroom apartments perfect for professionals and small families</span>
+                            </div>
+                            <div class="rental-card">
+                                <span class="icon"><i class="fas fa-couch"></i></span>
+                                <span class="name">Furnished Options</span>
+                                <span class="description">Premium furnished apartments with designer furniture and complete amenities</span>
+                            </div>
+                        </div>
+                        
+                        <h3 style="margin-top: 30px;">Prime Locations</h3>
+                        <p>Our properties are strategically located in Zurich's most prestigious neighborhoods including Kreis 1 (Altstadt), Kreis 2 (Enge, Wollishofen), Kreis 4 (Aussersihl), and Kreis 8 (Riesbach), offering excellent connectivity and access to the city's best amenities.</p>
+                        
+                        <div class="hero-buttons" style="margin-top: 40px;">
+                            <a href="https://wa.me/41765354552" class="whatsapp-button" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                Inquire About Rentals
+                            </a>
+                            <a href="mailto:info.myrevalo@gmail.com" class="cta-button">
+                                <i class="fas fa-envelope"></i>
+                                Schedule Viewing
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="rentals-image">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Zurich Premium Apartments">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investment" class="investment-section">
+            <div class="container investment-content">
+                <h2>Investment Opportunity</h2>
+                <p>Join Revalo in transforming real estate investments with our complete management solution and international tax optimization strategies</p>
+                
+                <div class="investment-cards">
+                    <div class="investment-card">
+                        <div class="icon"><i class="fas fa-euro-sign"></i></div>
+                        <h3>Investment Structure</h3>
+                        <p>Flexible investment structures tailored to different investor profiles and objectives, with various entry points available.</p>
+                    </div>
+                    
+                    <div class="investment-card">
+                        <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                        <h3>Portfolio Diversification</h3>
+                        <p>Invest across multiple properties and strategies to minimize risk while maximizing returns through diversified exposure.</p>
+                    </div>
+                    
+                    <div class="investment-card">
+                        <div class="icon"><i class="fas fa-crown"></i></div>
+                        <h3>Premium Investments</h3>
+                        <p>Access to exclusive large-scale opportunities in hospitality, infrastructure, and sustainable energy sectors.</p>
+                    </div>
+                    
+                    <div class="investment-card">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Risk Management</h3>
+                        <p>Comprehensive due diligence, professional management, and strategic exit planning protect investor capital.</p>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons" style="margin-top: 50px;">
+                    <a href="mailto:info.myrevalo@gmail.com" class="cta-button">
+                        <i class="fas fa-envelope"></i>
+                        Request Investor Package
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container cta-content">
+                <h2>Ready for Premium Real Estate Investing?</h2>
+                <p>Join our exclusive network of sophisticated investors and experience the Revalo difference. Schedule your confidential consultation with our investment specialists today.</p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/41765354552" class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp +41 76 535 45 52
+                    </a>
+                    <a href="mailto:info.myrevalo@gmail.com" class="cta-button">
+                        <i class="fas fa-envelope"></i>
+                        Email info.myrevalo@gmail.com
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contacts">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-column">
+                        <h3>Revalo Partners</h3>
+                        <p>Premium real estate investment management delivering exceptional returns through strategic property acquisition, development, and management.</p>
+                        <div class="contact-info">
+                            <a href="tel:+41765354552">
+                                <i class="fas fa-phone"></i>
+                                +41 76 535 45 52
+                            </a>
+                            <a href="mailto:info.myrevalo@gmail.com">
+                                <i class="fas fa-envelope"></i>
+                                info.myrevalo@gmail.com
+                            </a>
+                            <a href="https://wa.me/41765354552" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp +41 76 535 45 52
+                            </a>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Global Offices</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Zurich, Switzerland</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Brescia, Italy</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Tirana, Albania</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Investor Services</h3>
+                        <ul>
+                            <li><a href="#services"><i class="fas fa-building"></i> Property Acquisition</a></li>
+                            <li><a href="#services"><i class="fas fa-tools"></i> Renovation Management</a></li>
+                            <li><a href="#services"><i class="fas fa-home"></i> Luxury Sales</a></li>
+                            <li><a href="#services"><i class="fas fa-concierge-bell"></i> Rental Management</a></li>
+                            <li><a href="#zurich-rentals"><i class="fas fa-key"></i> Zurich Rentals</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Connect With Us</h3>
+                        <p>Subscribe to receive exclusive investment opportunities and market insights.</p>
+                        <form style="display: flex; flex-direction: column; gap: 12px;">
+                            <input type="email" placeholder="Your professional email" style="width: 100%; padding: 14px; border: none; border-radius: 10px; background: rgba(255,255,255,0.1); color: white; font-size: 14px;">
+                            <button type="submit" class="cta-button" style="width: 100%; justify-content: center;">
+                                <i class="fas fa-paper-plane"></i>
+                                Subscribe to Insights
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2024 Revalo Partners. All rights reserved. | Premium Real Estate Investment Management</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Gestione dell'animazione di caricamento
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const body = document.body;
+            
+            // Attendi che l'animazione del logo sia completata
+            setTimeout(function() {
+                loadingScreen.classList.add('hidden');
+                body.classList.remove('loading');
+                body.classList.add('loaded');
+                
+                // Rimuovi completamente l'elemento dopo la transizione
+                setTimeout(function() {
+                    loadingScreen.remove();
+                }, 800);
+            }, 2500); // Durata totale dell'animazione
+        });
+
+        // Enhanced header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollY = window.scrollY;
+            
+            if (scrollY > 100) {
+                header.style.padding = '12px 0';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 8px 30px rgba(10, 26, 53, 0.15)';
+            } else {
+                header.style.padding = '18px 0';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 5px 20px rgba(10, 26, 53, 0.08)';
+            }
+        });
+        
+        // Smooth scrolling with offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add active class to navigation links
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Business model tabs
+        const modelTabs = document.querySelectorAll('.model-tab');
+        const modelContents = document.querySelectorAll('.model-content');
+        
+        modelTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                modelTabs.forEach(t => t.classList.remove('active'));
+                modelContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
